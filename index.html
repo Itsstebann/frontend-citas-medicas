@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Citas Médicas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- LOGIN -->
+    <div id="pantalla-login" class="pantalla activa">
+        <div class="card">
+            <h1>Citas Médicas</h1>
+            <p class="subtitulo">Inicia sesión para continuar</p>
+            <div class="campo">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="tu@email.com">
+            </div>
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" id="login-password" placeholder="••••••••">
+            </div>
+            <button onclick="iniciarSesion()" class="btn-primary">Iniciar sesión</button>
+            <p class="link" onclick="mostrarPantalla('pantalla-registro')">¿No tienes cuenta? Regístrate</p>
+            <p id="login-error" class="error"></p>
+        </div>
+    </div>
+
+    <!-- REGISTRO -->
+    <div id="pantalla-registro" class="pantalla">
+        <div class="card">
+            <h1>Crear cuenta</h1>
+            <p class="subtitulo">Regístrate para agendar citas</p>
+            <div class="campo">
+                <label>Email</label>
+                <input type="email" id="registro-email" placeholder="tu@email.com">
+            </div>
+            <div class="campo">
+                <label>Contraseña</label>
+                <input type="password" id="registro-password" placeholder="••••••••">
+            </div>
+            <button onclick="registrarse()" class="btn-primary">Crear cuenta</button>
+            <p class="link" onclick="mostrarPantalla('pantalla-login')">¿Ya tienes cuenta? Inicia sesión</p>
+            <p id="registro-error" class="error"></p>
+            <p id="registro-exito" class="exito"></p>
+        </div>
+    </div>
+
+    <!-- PANEL PRINCIPAL -->
+    <div id="pantalla-principal" class="pantalla">
+        <nav>
+            <h2>Citas Médicas</h2>
+            <div style="display:flex;gap:12px;align-items:center">
+                <span id="nav-email" style="font-size:13px;color:#888"></span>
+                <button onclick="cerrarSesion()" class="btn-secondary">Cerrar sesión</button>
+            </div>
+        </nav>
+        <div class="contenido">
+
+            <!-- DOCTORES -->
+            <div class="seccion">
+                <h3>Doctores disponibles</h3>
+                <div id="lista-doctores" class="lista"></div>
+            </div>
+
+            <!-- AGENDAR CITA -->
+            <div class="seccion">
+                <h3>Agendar cita</h3>
+                <div class="campo">
+                    <label>Doctor</label>
+                    <select id="cita-doctor"></select>
+                </div>
+                <div class="campo">
+                    <label>Fecha y hora</label>
+                    <input type="datetime-local" id="cita-fecha">
+                </div>
+                <div class="campo">
+                    <label>Síntomas (opcional)</label>
+                    <textarea id="cita-sintomas" placeholder="Describe tus síntomas..."></textarea>
+                </div>
+                <div class="campo">
+                    <label>Urgencia (1-10)</label>
+                    <input type="number" id="cita-urgencia" min="1" max="10" value="1">
+                </div>
+                <button onclick="agendarCita()" class="btn-primary">Agendar cita</button>
+                <p id="cita-mensaje" class="mensaje"></p>
+            </div>
+
+            <!-- CREAR DOCTOR -->
+            <div class="seccion">
+                <h3>Registrar doctor</h3>
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input type="text" id="doctor-nombre" placeholder="Nombre completo">
+                </div>
+                <div class="campo">
+                    <label>Especialización</label>
+                    <input type="text" id="doctor-especializacion" placeholder="Ej: Cardiología">
+                </div>
+                <div class="campo">
+                    <label>Duración por cita (minutos)</label>
+                    <input type="number" id="doctor-duracion" value="30" min="10">
+                </div>
+                <button onclick="crearDoctor()" class="btn-primary">Registrar doctor</button>
+                <p id="doctor-mensaje" class="mensaje"></p>
+            </div>
+
+            <!-- MIS CITAS -->
+            <div class="seccion seccion-ancha">
+                <h3>Mis citas</h3>
+                <button onclick="cargarCitas()" class="btn-secondary" style="margin-bottom:16px">Actualizar</button>
+                <div id="lista-citas" class="lista"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
